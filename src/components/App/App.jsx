@@ -4,8 +4,6 @@ import "./App.css";
 import Description from "../Description/Description";
 import Feedback from "../Feedback/Feedback";
 import Options from "../Options/Options";
-import Notification from "../Notification/Notification";
-import PositiveFeedback from "../PositiveFeedback/PositiveFeedback";
 
 function App() {
   const [feedbackTypes, setFeedbackTypes] = useState(() => {
@@ -30,27 +28,40 @@ function App() {
   const totalFeedback =
     feedbackTypes.good + feedbackTypes.neutral + feedbackTypes.bad;
 
-  const positiveFeedback = Math.round(
-    (feedbackTypes.good / totalFeedback) * 100
-  );
+  const updateFeedback = (feedback) => {
+    //   if (feedback === "good") {
+    //     setFeedbackTypes({
+    //       ...feedbackTypes,
+    //       good: feedbackTypes.good + 1,
+    //     });
+    //   } else if (feedback === "neutral") {
+    //     setFeedbackTypes({
+    //       ...feedbackTypes,
+    //       neutral: feedbackTypes.neutral + 1,
+    //     });
+    //   } else if (feedback === "bad") {
+    //     setFeedbackTypes({
+    //       ...feedbackTypes,
+    //       bad: feedbackTypes.bad + 1,
+    //     });
+    //   }
+
+    setFeedbackTypes({
+      ...feedbackTypes,
+      [feedback]: feedbackTypes[feedback] + 1,
+    });
+  };
 
   return (
     <>
       <Description />
       <Options
-        feedbackTypes={feedbackTypes}
+        updateFeedback={updateFeedback}
         setFeedbackTypes={setFeedbackTypes}
         totalFeedback={totalFeedback}
       />
 
-      {totalFeedback > 0 ? (
-        <>
-          <Feedback feedbackTypes={feedbackTypes} />
-          <PositiveFeedback positiveFeedback={positiveFeedback} />
-        </>
-      ) : (
-        <Notification />
-      )}
+      <Feedback feedbackTypes={feedbackTypes} totalFeedback={totalFeedback} />
     </>
   );
 }

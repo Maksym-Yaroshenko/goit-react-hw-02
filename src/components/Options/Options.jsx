@@ -1,34 +1,10 @@
 import css from "./Options.module.css";
 
 export default function Options({
-  feedbackTypes,
+  updateFeedback,
   setFeedbackTypes,
   totalFeedback,
 }) {
-  const updateFeedback = (feedback) => {
-    //   if (feedback === "good") {
-    //     setFeedbackTypes({
-    //       ...feedbackTypes,
-    //       good: feedbackTypes.good + 1,
-    //     });
-    //   } else if (feedback === "neutral") {
-    //     setFeedbackTypes({
-    //       ...feedbackTypes,
-    //       neutral: feedbackTypes.neutral + 1,
-    //     });
-    //   } else if (feedback === "bad") {
-    //     setFeedbackTypes({
-    //       ...feedbackTypes,
-    //       bad: feedbackTypes.bad + 1,
-    //     });
-    //   }
-
-    setFeedbackTypes({
-      ...feedbackTypes,
-      [feedback]: feedbackTypes[feedback] + 1,
-    });
-  };
-
   return (
     <div className={css.container}>
       <button className={css.btn} onClick={() => updateFeedback("good")}>
