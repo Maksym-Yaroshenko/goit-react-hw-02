@@ -4,9 +4,7 @@ import "./App.css";
 import Description from "../Description/Description";
 import Feedback from "../Feedback/Feedback";
 import Options from "../Options/Options";
-import PositiveFeedback from "../PositiveFeedback/PositiveFeedback";
 import Notification from "../Notification/Notification";
-import TotalFeedback from "../TotalFeedback/TotalFeedback.jsx";
 
 function App() {
   const [feedbackTypes, setFeedbackTypes] = useState(() => {
@@ -61,9 +59,8 @@ function App() {
           <Feedback
             feedbackTypes={feedbackTypes}
             totalFeedback={totalFeedback}
+            positiveFeedback={positiveFeedback}
           />
-          <TotalFeedback totalFeedback={totalFeedback} />
-          <PositiveFeedback positiveFeedback={positiveFeedback} />
         </>
       ) : (
         <Notification message="No feedback given" />
