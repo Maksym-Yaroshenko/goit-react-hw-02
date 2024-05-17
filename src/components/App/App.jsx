@@ -6,6 +6,7 @@ import Feedback from "../Feedback/Feedback";
 import Options from "../Options/Options";
 import PositiveFeedback from "../PositiveFeedback/PositiveFeedback";
 import Notification from "../Notification/Notification";
+import TotalFeedback from "../TotalFeedback/TotalFeedback.jsx";
 
 function App() {
   const [feedbackTypes, setFeedbackTypes] = useState(() => {
@@ -61,6 +62,7 @@ function App() {
             feedbackTypes={feedbackTypes}
             totalFeedback={totalFeedback}
           />
+          <TotalFeedback totalFeedback={totalFeedback} />
           <PositiveFeedback positiveFeedback={positiveFeedback} />
         </>
       ) : (
