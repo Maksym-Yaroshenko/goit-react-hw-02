@@ -2,7 +2,7 @@ import css from "./Options.module.css";
 
 export default function Options({
   updateFeedback,
-  setFeedbackTypes,
+  resetFeedback,
   totalFeedback,
 }) {
   return (
@@ -17,10 +17,7 @@ export default function Options({
         Bad
       </button>
       {totalFeedback > 0 && (
-        <button
-          className={css.btn}
-          onClick={() => setFeedbackTypes({ good: 0, neutral: 0, bad: 0 })}
-        >
+        <button className={css.btn} onClick={resetFeedback}>
           Reset
         </button>
       )}

@@ -4,6 +4,8 @@ import "./App.css";
 import Description from "../Description/Description";
 import Feedback from "../Feedback/Feedback";
 import Options from "../Options/Options";
+import PositiveFeedback from "../PositiveFeedback/PositiveFeedback";
+import Notification from "../Notification/Notification";
 
 function App() {
   const [feedbackTypes, setFeedbackTypes] = useState(() => {
@@ -28,28 +30,20 @@ function App() {
   const totalFeedback =
     feedbackTypes.good + feedbackTypes.neutral + feedbackTypes.bad;
 
-  const updateFeedback = (feedback) => {
-    //   if (feedback === "good") {
-    //     setFeedbackTypes({
-    //       ...feedbackTypes,
-    //       good: feedbackTypes.good + 1,
-    //     });
-    //   } else if (feedback === "neutral") {
-    //     setFeedbackTypes({
-    //       ...feedbackTypes,
-    //       neutral: feedbackTypes.neutral + 1,
-    //     });
-    //   } else if (feedback === "bad") {
-    //     setFeedbackTypes({
-    //       ...feedbackTypes,
-    //       bad: feedbackTypes.bad + 1,
-    //     });
-    //   }
+  const positiveFeedback =
+    totalFeedback > 0
+      ? Math.round((feedbackTypes.good / totalFeedback) * 100)
+      : 0;
 
+  const updateFeedback = (feedback) => {
     setFeedbackTypes({
       ...feedbackTypes,
       [feedback]: feedbackTypes[feedback] + 1,
     });
+  };
+
+  const resetFeedback = () => {
+    setFeedbackTypes({ good: 0, neutral: 0, bad: 0 });
   };
 
   return (
@@ -57,11 +51,21 @@ function App() {
       <Description />
       <Options
         updateFeedback={updateFeedback}
-        setFeedbackTypes={setFeedbackTypes}
+        resetFeedback={resetFeedback}
         totalFeedback={totalFeedback}
       />
 
-      <Feedback feedbackTypes={feedbackTypes} totalFeedback={totalFeedback} />
+      {totalFeedback > 0 ? (
+        <>
+          <Feedback
+            feedbackTypes={feedbackTypes}
+            totalFeedback={totalFeedback}
+          />
+          <PositiveFeedback positiveFeedback={positiveFeedback} />
+        </>
+      ) : (
+        <Notification message="No feedback given" />
+      )}
     </>
   );
 }
